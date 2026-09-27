@@ -1,0 +1,389 @@
+{
+  "languages": [
+    {
+      "id": "german",
+      "name": "German",
+      "icon": "🇩🇪",
+      "description": "Goethe-Zertifikat aligned curriculum for study, work, and migration to German-speaking countries.",
+      "levels": [
+        {
+          "id": "A1",
+          "name": "A1 - Beginner",
+          "description": "Basic communication for everyday situations.",
+          "modules": [
+            "Module 1: Alphabet, Pronunciation & Basic Greetings",
+            "Module 2: Numbers, Time & Dates",
+            "Module 3: Present Tense Verbs & Basic Sentence Structure",
+            "Module 4: Nominative & Accusative Cases",
+            "Module 5: Family, Professions & Daily Routine Vocabulary",
+            "Module 6: Shopping, Food & Restaurant Conversations",
+            "Module 7: Asking Directions & Public Transport",
+            "Module 8: Simple Past Tense (Präteritum) of Sein/Haben",
+            "Module 9: Writing Simple Emails & Messages",
+            "Module 10: A1 Exam Preparation & Mock Tests"
+          ]
+        },
+        {
+          "id": "A2",
+          "name": "A2 - Elementary",
+          "description": "Routine communication for work and social situations.",
+          "modules": [
+            "Module 1: Perfect Tense (Perfekt) & Past Experiences",
+            "Module 2: Dative Case & Prepositions",
+            "Module 3: Modal Verbs & Expressing Necessity/Permission",
+            "Module 4: Adjective Endings & Comparatives",
+            "Module 5: Health, Body Parts & Doctor Visits",
+            "Module 6: Travel, Hotels & Booking Vocabulary",
+            "Module 7: Work Life, Office Communication & CV Writing",
+            "Module 8: Future Tense & Making Plans",
+            "Module 9: Reading Short Texts & Writing Formal Letters",
+            "Module 10: A2 Exam Preparation & Mock Tests"
+          ]
+        },
+        {
+          "id": "B1",
+          "name": "B1 - Intermediate",
+          "description": "Independent language use for study and professional contexts.",
+          "modules": [
+            "Module 1: Subjunctive II (Konjunktiv II) & Polite Requests",
+            "Module 2: Genitive Case & Complex Prepositions",
+            "Module 3: Passive Voice & Alternatives",
+            "Module 4: Relative Clauses & Sentence Connection",
+            "Module 5: Education System, University Life & Applications",
+            "Module 6: German Culture, History & Society",
+            "Module 7: Professional Communication & Meetings",
+            "Module 8: Expressing Opinions, Arguments & Debates",
+            "Module 9: Writing Essays, Reports & Complaints",
+            "Module 10: B1 Exam Preparation & Mock Tests"
+          ]
+        },
+        {
+          "id": "B2",
+          "name": "B2 - Upper Intermediate",
+          "description": "Complex language for academic and professional fluency.",
+          "modules": [
+            "Module 1: Advanced Subjunctive & Indirect Speech",
+            "Module 2: Nominalization & Academic Writing Style",
+            "Module 3: Complex Sentence Structures & Connectors",
+            "Module 4: Idioms, Colloquialisms & Register Variation",
+            "Module 5: German Literature, Media & Current Affairs",
+            "Module 6: Scientific/Academic Text Analysis",
+            "Module 7: Negotiations, Presentations & Leadership",
+            "Module 8: Creative Writing & Advanced Expression",
+            "Module 9: C1 Transition Preparation",
+            "Module 10: B2 Exam Preparation & Mock Tests"
+          ]
+        },
+        {
+          "id": "C1",
+          "name": "C1 - Advanced",
+          "description": "Near-native proficiency for demanding academic/professional use.",
+          "modules": [
+            "Module 1: Implicit Meanings, Nuance & Pragmatics",
+            "Module 2: Specialized Terminology (Law, Medicine, Tech, Business)",
+            "Module 3: Academic Research Writing & Citations",
+            "Module 4: Conference Participation & Expert Discussions",
+            "Module 5: German Philosophy, Arts & Intellectual History",
+            "Module 6: Translation & Interpretation Skills",
+            "Module 7: Professional Certification & Licensing Prep",
+            "Module 8: C1 Exam Preparation & Mock Tests"
+          ]
+        },
+        {
+          "id": "C2",
+          "name": "C2 - Mastery",
+          "description": "Mastery level for native-equivalent professional use.",
+          "modules": [
+            "Module 1: Effortless Comprehension of All Spoken/Written German",
+            "Module 2: Spontaneous, Precise, Nuanced Expression",
+            "Module 3: Complex Argumentation & Rhetorical Mastery",
+            "Module 4: Literary Analysis & Creative Authorship",
+            "Module 5: C2 Exam Preparation & Mock Tests"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "french",
+      "name": "French",
+      "icon": "🇫🇷",
+      "description": "DELF/DALF aligned curriculum for international certification and global opportunities.",
+      "levels": [
+        {
+          "id": "A1",
+          "name": "A1 - Beginner",
+          "description": "Basic communication for everyday situations.",
+          "modules": [
+            "Module 1: Alphabet, Pronunciation & Liaisons",
+            "Module 2: Greetings, Introductions & Politeness",
+            "Module 3: Present Tense (Regular & Key Irregular Verbs)",
+            "Module 4: Gender, Articles & Basic Noun-Adjective Agreement",
+            "Module 5: Numbers, Time, Dates & Weather",
+            "Module 6: Family, Housing & Daily Routine Vocabulary",
+            "Module 7: Shopping, Food, Restaurant & Market Dialogues",
+            "Module 8: Asking Directions & Transport",
+            "Module 9: Passé Composé Introduction",
+            "Module 10: A1 Exam Preparation & Mock Tests"
+          ]
+        },
+        {
+          "id": "A2",
+          "name": "A2 - Elementary",
+          "description": "Routine communication for travel and social interaction.",
+          "modules": [
+            "Module 1: Passé Composé vs Imparfait",
+            "Module 2: Futur Simple & Futur Proche",
+            "Module 3: Pronouns (Object, Y, En) & Imperative",
+            "Module 4: Reflexive Verbs & Daily Routine",
+            "Module 5: Health, Pharmacy & Medical Vocabulary",
+            "Module 6: Travel, Accommodation & Tourism",
+            "Module 7: Work, CV & Professional Introductions",
+            "Module 8: Expressing Preferences, Opinions & Advice",
+            "Module 9: Writing Postcards, Emails & Simple Letters",
+            "Module 10: A2 Exam Preparation & Mock Tests"
+          ]
+        },
+        {
+          "id": "B1",
+          "name": "B1 - Intermediate",
+          "description": "Independent use for study, work and living in Francophone countries.",
+          "modules": [
+            "Module 1: Subjunctive Present (Subjective/Emotion/Doubt)",
+            "Module 2: Conditionnel Present & Past",
+            "Module 3: Relative Pronouns (Qui, Que, Dont, Où)",
+            "Module 4: Passive Voice & Impersonal Structures",
+            "Module 5: Education, University & Student Life in France",
+            "Module 6: French Culture, Regions & Francophonie",
+            "Module 7: Professional Communication & Formal Register",
+            "Module 8: Debating, Hypothesizing & Structured Arguments",
+            "Module 9: Writing Essays, Formal Letters & Summaries",
+            "Module 10: B1 Exam Preparation & Mock Tests"
+          ]
+        },
+        {
+          "id": "B2",
+          "name": "B2 - Upper Intermediate",
+          "description": "Complex language for academic and professional fluency.",
+          "modules": [
+            "Module 1: Subjunctive Past & Literary Tenses",
+            "Module 2: Advanced Connectors & Discourse Markers",
+            "Module 3: Nominalization & Academic Style",
+            "Module 4: Idioms, Register & Sociolinguistic Variation",
+            "Module 5: French Literature, Cinema & Media Analysis",
+            "Module 6: Current Affairs, Society & Politics",
+            "Module 7: Negotiations, Meetings & Professional Writing",
+            "Module 8: Creative Writing & Advanced Expression",
+            "Module 9: C1 Transition Preparation",
+            "Module 10: B2 Exam Preparation & Mock Tests"
+          ]
+        },
+        {
+          "id": "C1",
+          "name": "C1 - Advanced",
+          "description": "Autonomous proficiency for demanding contexts.",
+          "modules": [
+            "Module 1: Implicit Meaning, Irony & Nuance",
+            "Module 2: Specialized Terminology (Legal, Medical, Business, Tech)",
+            "Module 3: Academic Research & Dissertation Writing",
+            "Module 4: Conference Participation & Expert Discourse",
+            "Module 5: Francophone Literature & Intellectual History",
+            "Module 6: Translation & Localization Skills",
+            "Module 7: Professional Certification Preparation",
+            "Module 8: C1 Exam Preparation & Mock Tests"
+          ]
+        },
+        {
+          "id": "C2",
+          "name": "C2 - Mastery",
+          "description": "Mastery for native-equivalent professional and academic use.",
+          "modules": [
+            "Module 1: Effortless Comprehension of All Registers",
+            "Module 2: Precise, Nuanced, Spontaneous Expression",
+            "Module 3: Complex Rhetoric & Argumentation",
+            "Module 4: Literary Criticism & Creative Authorship",
+            "Module 5: C2 Exam Preparation & Mock Tests"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "chinese",
+      "name": "Chinese (Mandarin)",
+      "icon": "🇨🇳",
+      "description": "HSK aligned curriculum for business, study, and cultural engagement with China.",
+      "levels": [
+        {
+          "id": "HSK1",
+          "name": "HSK 1 - Beginner",
+          "description": "150 words, basic sentences for immediate needs.",
+          "modules": [
+            "Module 1: Pinyin, Tones & Pronunciation Fundamentals",
+            "Module 2: Basic Strokes, Radicals & Character Structure",
+            "Module 3: Greetings, Introductions & Polite Formulas",
+            "Module 4: Numbers, Measure Words & Quantities",
+            "Module 5: Family, Occupations & Basic Descriptions",
+            "Module 6: Food, Drinks & Restaurant Ordering",
+            "Module 7: Dates, Time, Schedules & Appointments",
+            "Module 8: Location, Directions & Transport",
+            "Module 9: Simple Questions & Answers (Yes/No, What/Who/Where)",
+            "Module 10: HSK 1 Exam Preparation & Mock Tests"
+          ]
+        },
+        {
+          "id": "HSK2",
+          "name": "HSK 2 - Elementary",
+          "description": "300 words, simple direct exchange on familiar topics.",
+          "modules": [
+            "Module 1: Aspect Particles (Le, Guo, Zhe) & Action Completion",
+            "Module 2: Comparisons (Bi, Mei You, Zui) & Superlatives",
+            "Module 3: Modal Verbs (Yao, Xiang, Neng, Hui, Keyi)",
+            "Module 4: Directional Complements & Location Changes",
+            "Module 5: Shopping, Prices, Bargaining & Colors",
+            "Module 6: Weather, Seasons & Clothing",
+            "Module 7: Hobbies, Sports & Leisure Activities",
+            "Module 8: Making Plans, Invitations & Refusals",
+            "Module 9: Basic Reading & Writing Short Paragraphs",
+            "Module 10: HSK 2 Exam Preparation & Mock Tests"
+          ]
+        },
+        {
+          "id": "HSK3",
+          "name": "HSK 3 - Intermediate",
+          "description": "600 words, basic communication in daily, academic, professional life.",
+          "modules": [
+            "Module 1: Ba & Bei Constructions (Disposal/Passive)",
+            "Module 2: Result & Direction Complements (V-Dao, V-Wan, V-Shang)",
+            "Module 3: Potential Complements (V-De-Liao, V-Bu-Liao)",
+            "Module 4: Complex Sentence Patterns (Suiran...Danshi, Yibian...Yibian)",
+            "Module 5: Travel, Hotels, Booking & Itineraries",
+            "Module 6: Health, Symptoms, Hospital & Pharmacy",
+            "Module 7: Work, Office, Meetings & Business Etiquette",
+            "Module 8: Chinese Culture, Festivals & Customs",
+            "Module 9: Writing Emails, Notices & Short Essays",
+            "Module 10: HSK 3 Exam Preparation & Mock Tests"
+          ]
+        },
+        {
+          "id": "HSK4",
+          "name": "HSK 4 - Upper Intermediate",
+          "description": "1200 words, fluent discussion on wide range of topics.",
+          "modules": [
+            "Module 1: Advanced Grammar (Chufei, Jichu, Yuyi, Weile)",
+            "Module 2: Formal Written Chinese vs Spoken Register",
+            "Module 3: Idioms (Chengyu), Proverbs & Classical References",
+            "Module 4: Abstract Topics (Environment, Technology, Society)",
+            "Module 5: News Media, Articles & Opinion Pieces",
+            "Module 6: Business Chinese: Negotiations, Contracts, Presentations",
+            "Module 7: Academic Chinese: Lectures, Papers, Citations",
+            "Module 8: Translation Skills (Chinese-English-Chinese)",
+            "Module 9: HSK 5 Transition Preparation",
+            "Module 10: HSK 4 Exam Preparation & Mock Tests"
+          ]
+        },
+        {
+          "id": "HSK5",
+          "name": "HSK 5 - Advanced",
+          "description": "2500 words, read newspapers, watch films, give speeches.",
+          "modules": [
+            "Module 1: Sophisticated Grammar & Rhetorical Devices",
+            "Module 2: Literary Texts, Essays & Academic Papers",
+            "Module 3: Specialized Domains (Law, Finance, Medicine, Tech)",
+            "Module 4: Professional Speaking: Speeches, Debates, Panels",
+            "Module 5: Advanced Writing: Reports, Proposals, Articles",
+            "Module 6: Chinese Contemporary Society & Thought",
+            "Module 7: HSK 6 Transition Preparation",
+            "Module 8: HSK 5 Exam Preparation & Mock Tests"
+          ]
+        },
+        {
+          "id": "HSK6",
+          "name": "HSK 6 - Mastery",
+          "description": "5000+ words, effortless comprehension and expression.",
+          "modules": [
+            "Module 1: Classical Chinese Foundations (Wenyanwen)",
+            "Module 2: Advanced Translation & Interpretation",
+            "Module 3: Professional Certification & Specialized Exams",
+            "Module 4: Creative Writing & Literary Criticism",
+            "Module 5: HSK 6 Exam Preparation & Mock Tests"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "spoken-english",
+      "name": "Spoken English",
+      "icon": "🇬🇧",
+      "description": "Practical spoken English for IELTS, professional communication, and daily confidence.",
+      "levels": [
+        {
+          "id": "foundation",
+          "name": "Foundation - Basic Communication",
+          "description": "Build core speaking confidence and essential vocabulary.",
+          "modules": [
+            "Module 1: Phonetics, Pronunciation & Intonation Patterns",
+            "Module 2: Essential Grammar for Speaking (Tenses, Modals, Questions)",
+            "Module 3: Daily Routines, Self-Introduction & Small Talk",
+            "Module 4: Shopping, Dining, Transport & Travel English",
+            "Module 5: Describing People, Places, Objects & Experiences",
+            "Module 6: Giving Opinions, Agreeing/Disagreeing Politely",
+            "Module 7: Phone Calls, Messages & Digital Communication",
+            "Module 8: Role-plays: Real-life Situations Practice",
+            "Module 9: Listening Skills: Accents, Speed, Context Clues",
+            "Module 10: Foundation Assessment & Progress Review"
+          ]
+        },
+        {
+          "id": "intermediate",
+          "name": "Intermediate - Fluent Communication",
+          "description": "Natural conversation, workplace English, IELTS 5.5-6.5 prep.",
+          "modules": [
+            "Module 1: Complex Grammar (Conditionals, Passive, Reported Speech)",
+            "Module 2: Idioms, Phrasal Verbs & Collocations",
+            "Module 3: Workplace English: Meetings, Presentations, Emails",
+            "Module 4: Storytelling, Anecdotes & Extended Speaking",
+            "Module 5: Discussing Abstract Topics (Culture, Technology, Society)",
+            "Module 6: Problem Solving, Negotiation & Persuasion",
+            "Module 7: IELTS Speaking Part 1/2/3 Strategies",
+            "Module 8: Pronunciation Refinement: Connected Speech, Stress",
+            "Module 9: Group Discussions & Debate Skills",
+            "Module 10: Intermediate Assessment & IELTS Mock Test"
+          ]
+        },
+        {
+          "id": "advanced",
+          "name": "Advanced - Professional Mastery",
+          "description": "Near-native fluency, IELTS 7+, leadership communication.",
+          "modules": [
+            "Module 1: Advanced Rhetoric, Register & Stylistic Variation",
+            "Module 2: Specialized English (Business, Legal, Medical, Academic)",
+            "Module 3: Leadership Communication: Influence, Inspire, Coach",
+            "Module 4: Critical Thinking, Argumentation & Impromptu Speaking",
+            "Module 5: Cross-cultural Communication & Global English",
+            "Module 6: Media Training: Interviews, Panels, Public Speaking",
+            "Module 7: IELTS 7+/8+ Strategies & Advanced Mock Tests",
+            "Module 8: Accent Neutralization & Professional Polish",
+            "Module 9: Writing for Speaking: Scripts, Speeches, Proposals",
+            "Module 10: Advanced Assessment & Certification Prep"
+          ]
+        },
+        {
+          "id": "ielts-intensive",
+          "name": "IELTS Intensive (Academic/General)",
+          "description": "Targeted preparation for 7+ band score.",
+          "modules": [
+            "Module 1: Speaking Test Format, Criteria & Examiner Expectations",
+            "Module 2: Part 1: Fluency, Vocabulary, Grammar, Pronunciation",
+            "Module 3: Part 2: Long Turn - Structure, Notes, Timing, Topics",
+            "Module 4: Part 3: Discussion - Abstract Ideas, Speculation, Analysis",
+            "Module 5: High-Scoring Vocabulary & Grammatical Range",
+            "Module 6: Pronunciation Features: Chunking, Intonation, Emphasis",
+            "Module 7: Common Topics Bank: Education, Work, Technology, Environment",
+            "Module 8: Full Mock Tests with Feedback & Band Estimation",
+            "Module 9: Test Day Strategies & Psychological Preparation",
+            "Module 10: Final Intensive Review & Confidence Building"
+          ]
+        }
+      ]
+    }
+  ]
+}

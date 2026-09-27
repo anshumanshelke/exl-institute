@@ -1,0 +1,8 @@
+<svg width="400" height="225" viewBox="0 0 400 225" xmlns="http://www.w3.org/2000/svg">
+  <rect width="400" height="225" fill="#0d2a45"/>
+  <circle cx="160" cy="100" r="35" fill="#1a3c5e" opacity="0.5"/>
+  <circle cx="240" cy="100" r="35" fill="#1a3c5e" opacity="0.5"/>
+  <path d="M160 85 L160 65 M240 85 L240 65" stroke="#e8a838" stroke-width="3" stroke-linecap="round"/>
+  <path d="M160 100 Q200 140 240 100" stroke="#e8a838" stroke-width="3" fill="none"/>
+  <text x="200" y="180" font-family="system-ui, sans-serif" font-size="16" font-weight="600" fill="#ffffff" text-anchor="middle">Practice & Revision</text>
+</svg>

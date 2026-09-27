@@ -1,0 +1,58 @@
+{
+  "testimonials": [
+    {
+      "id": 1,
+      "name": "[PLACEHOLDER: Student Name]",
+      "photo": "/assets/testimonial-placeholder.svg",
+      "language": "[PLACEHOLDER: German]",
+      "level": "[PLACEHOLDER: B1]",
+      "review": "[PLACEHOLDER: The live classes helped me understand German much faster than self-study apps. The teacher's personal attention and immediate feedback made all the difference. I cleared my B1 exam in first attempt!]",
+      "achievement": "[PLACEHOLDER: Cleared Goethe B1, now working in Berlin]"
+    },
+    {
+      "id": 2,
+      "name": "[PLACEHOLDER: Student Name]",
+      "photo": "/assets/testimonial-placeholder.svg",
+      "language": "[PLACEHOLDER: French]",
+      "level": "[PLACEHOLDER: B2]",
+      "review": "[PLACEHOLDER: I was skeptical about online language classes, but EXL Institute changed my mind. The structured approach, regular practice, and the teacher's deep knowledge of DELF exam patterns got me my B2 certification.]",
+      "achievement": "[PLACEHOLDER: DELF B2 certified, pursuing Masters in France]"
+    },
+    {
+      "id": 3,
+      "name": "[PLACEHOLDER: Student Name]",
+      "photo": "/assets/testimonial-placeholder.svg",
+      "language": "[PLACEHOLDER: Chinese]",
+      "level": "[PLACEHOLDER: HSK 4]",
+      "review": "[PLACEHOLDER: Learning Chinese seemed impossible until I joined these classes. The teacher breaks down tones and characters in a way that actually makes sense. The cultural context she provides is invaluable for business.]",
+      "achievement": "[PLACEHOLDER: HSK 4 cleared, expanded business to Shanghai]"
+    },
+    {
+      "id": 4,
+      "name": "[PLACEHOLDER: Student Name]",
+      "photo": "/assets/testimonial-placeholder.svg",
+      "language": "[PLACEHOLDER: Spoken English / IELTS]",
+      "level": "[PLACEHOLDER: IELTS 7.5]",
+      "review": "[PLACEHOLDER: The IELTS intensive course was exactly what I needed. Focused practice on each section, personalized feedback on my speaking and writing, and strategies that actually work. Scored 7.5 overall!]",
+      "achievement": "[PLACEHOLDER: IELTS 7.5, admitted to Canadian university]"
+    },
+    {
+      "id": 5,
+      "name": "[PLACEHOLDER: Student Name]",
+      "photo": "/assets/testimonial-placeholder.svg",
+      "language": "[PLACEHOLDER: German]",
+      "level": "[PLACEHOLDER: A2]",
+      "review": "[PLACEHOLDER: As a working professional, I needed flexible but structured learning. The live class timing worked perfectly, and the guided self-study materials meant I could progress between sessions. Highly recommended for busy adults.]",
+      "achievement": "[PLACEHOLDER: Goethe A2 cleared, preparing for B1]"
+    },
+    {
+      "id": 6,
+      "name": "[PLACEHOLDER: Student Name]",
+      "photo": "/assets/testimonial-placeholder.svg",
+      "language": "[PLACEHOLDER: French]",
+      "level": "[PLACEHOLDER: A1]",
+      "review": "[PLACEHOLDER: Started as a complete beginner and the teacher made French feel approachable, not intimidating. The small class size meant I got to speak in every session. Building confidence was the biggest win for me.]",
+      "achievement": "[PLACEHOLDER: DELF A1 cleared, continuing to A2]"
+    }
+  ]
+}

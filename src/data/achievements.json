@@ -1,0 +1,68 @@
+{
+  "students": [
+    {
+      "id": 1,
+      "name": "[PLACEHOLDER: Student Name]",
+      "photo": "/assets/student-placeholder.svg",
+      "achievement": "[PLACEHOLDER: e.g., Successfully completed German A2 certification]",
+      "course": "[PLACEHOLDER: German A2]",
+      "description": "[PLACEHOLDER: Optional longer description - current status, university, job, location]"
+    },
+    {
+      "id": 2,
+      "name": "[PLACEHOLDER: Student Name]",
+      "photo": "/assets/student-placeholder.svg",
+      "achievement": "[PLACEHOLDER: e.g., Currently pursuing Master's studies in Germany]",
+      "course": "[PLACEHOLDER: German B1]",
+      "description": "[PLACEHOLDER: Optional longer description]"
+    },
+    {
+      "id": 3,
+      "name": "[PLACEHOLDER: Student Name]",
+      "photo": "/assets/student-placeholder.svg",
+      "achievement": "[PLACEHOLDER: e.g., Cleared DELF B2 French exam]",
+      "course": "[PLACEHOLDER: French B2]",
+      "description": "[PLACEHOLDER: Optional longer description]"
+    },
+    {
+      "id": 4,
+      "name": "[PLACEHOLDER: Student Name]",
+      "photo": "/assets/student-placeholder.svg",
+      "achievement": "[PLACEHOLDER: e.g., Got job in multinational company using Chinese]",
+      "course": "[PLACEHOLDER: Chinese HSK 4]",
+      "description": "[PLACEHOLDER: Optional longer description]"
+    },
+    {
+      "id": 5,
+      "name": "[PLACEHOLDER: Student Name]",
+      "photo": "/assets/student-placeholder.svg",
+      "achievement": "[PLACEHOLDER: e.g., Scored IELTS 7.5 band]",
+      "course": "[PLACEHOLDER: Spoken English / IELTS Prep]",
+      "description": "[PLACEHOLDER: Optional longer description]"
+    },
+    {
+      "id": 6,
+      "name": "[PLACEHOLDER: Student Name]",
+      "photo": "/assets/student-placeholder.svg",
+      "achievement": "[PLACEHOLDER: e.g., Admitted to German university for Bachelor's]",
+      "course": "[PLACEHOLDER: German B2]",
+      "description": "[PLACEHOLDER: Optional longer description]"
+    },
+    {
+      "id": 7,
+      "name": "[PLACEHOLDER: Student Name]",
+      "photo": "/assets/student-placeholder.svg",
+      "achievement": "[PLACEHOLDER: e.g., Working as translator in Bangalore]",
+      "course": "[PLACEHOLDER: French C1]",
+      "description": "[PLACEHOLDER: Optional longer description]"
+    },
+    {
+      "id": 8,
+      "name": "[PLACEHOLDER: Student Name]",
+      "photo": "/assets/student-placeholder.svg",
+      "achievement": "[PLACEHOLDER: e.g., Business expansion to China after HSK 3]",
+      "course": "[PLACEHOLDER: Chinese HSK 3]",
+      "description": "[PLACEHOLDER: Optional longer description]"
+    }
+  ]
+}

@@ -1,0 +1,39 @@
+{
+  "sections": [
+    {
+      "id": "live-classes",
+      "title": "Live Classes",
+      "description": "Real-time interactive sessions with the teacher where students ask questions, practice speaking, and get immediate feedback. Not pre-recorded - every class is live.",
+      "iframeUrl": "[PLACEHOLDER: https://your-live-class-demo-embed-url.com]",
+      "placeholderImage": "/assets/teaching-live-placeholder.svg"
+    },
+    {
+      "id": "guided-learning",
+      "title": "Guided Learning",
+      "description": "Structured self-study materials provided by the teacher - worksheets, vocabulary lists, grammar exercises, and practice activities tailored to each level.",
+      "iframeUrl": "[PLACEHOLDER: https://your-guided-learning-embed-url.com]",
+      "placeholderImage": "/assets/teaching-guided-placeholder.svg"
+    },
+    {
+      "id": "self-study",
+      "title": "Self-Study at Home",
+      "description": "Students reinforce learning through assigned homework, audio practice, reading materials, and online exercises between live classes.",
+      "iframeUrl": "[PLACEHOLDER: https://your-self-study-embed-url.com]",
+      "placeholderImage": "/assets/teaching-selfstudy-placeholder.svg"
+    },
+    {
+      "id": "practice-revision",
+      "title": "Practice & Revision",
+      "description": "Regular revision sessions, mock tests, speaking practice groups, and personalized feedback to consolidate learning and track progress.",
+      "iframeUrl": "[PLACEHOLDER: https://your-practice-revision-embed-url.com]",
+      "placeholderImage": "/assets/teaching-practice-placeholder.svg"
+    },
+    {
+      "id": "exam-preparation",
+      "title": "Exam Preparation",
+      "description": "Focused training for Goethe, DELF/DALF, HSK, and IELTS exams - past papers, exam strategies, timing practice, and examiner insights.",
+      "iframeUrl": "[PLACEHOLDER: https://your-exam-prep-embed-url.com]",
+      "placeholderImage": "/assets/teaching-exam-placeholder.svg"
+    }
+  ]
+}

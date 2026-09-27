@@ -1,0 +1,7 @@
+<svg width="400" height="225" viewBox="0 0 400 225" xmlns="http://www.w3.org/2000/svg">
+  <rect width="400" height="225" fill="#1a3c5e"/>
+  <path d="M100 150 Q200 60 300 150" stroke="#e8a838" stroke-width="3" fill="none" stroke-dasharray="10,5"/>
+  <circle cx="200" cy="110" r="12" fill="#e8a838"/>
+  <ellipse cx="200" cy="150" rx="60" ry="20" fill="#e8a838" opacity="0.2"/>
+  <text x="200" y="180" font-family="system-ui, sans-serif" font-size="16" font-weight="600" fill="#ffffff" text-anchor="middle">Self-Study at Home</text>
+</svg>

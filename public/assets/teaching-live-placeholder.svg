@@ -1,0 +1,6 @@
+<svg width="400" height="225" viewBox="0 0 400 225" xmlns="http://www.w3.org/2000/svg">
+  <rect width="400" height="225" fill="#1a3c5e"/>
+  <circle cx="200" cy="112" r="40" fill="#e8a838" opacity="0.3"/>
+  <path d="M175 100 L200 130 L230 90" stroke="#e8a838" stroke-width="4" fill="none" stroke-linecap="round" stroke-linejoin="round" opacity="0.8"/>
+  <text x="200" y="180" font-family="system-ui, sans-serif" font-size="16" font-weight="600" fill="#ffffff" text-anchor="middle">Live Classes</text>
+</svg>

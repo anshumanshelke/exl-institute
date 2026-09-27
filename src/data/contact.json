@@ -1,0 +1,17 @@
+{
+  "address": "[PLACEHOLDER: Institute street address, city, state, PIN code]",
+  "email": "vijaysalgaonkar2026@gmail.com",
+  "phone": "[PLACEHOLDER: +91-XXXXXXXXXX]",
+  "whatsapp": "[PLACEHOLDER: 91XXXXXXXXXX]",
+  "social": {
+    "facebook": "[PLACEHOLDER: https://facebook.com/exlinstitute]",
+    "instagram": "[PLACEHOLDER: https://instagram.com/exlinstitute]",
+    "linkedin": "[PLACEHOLDER: https://linkedin.com/company/exlinstitute]",
+    "youtube": "[PLACEHOLDER: https://youtube.com/@exlinstitute]"
+  },
+  "emailjs": {
+    "serviceId": "[PLACEHOLDER: EmailJS Service ID]",
+    "templateId": "[PLACEHOLDER: EmailJS Template ID]",
+    "publicKey": "[PLACEHOLDER: EmailJS Public Key]"
+  }
+}

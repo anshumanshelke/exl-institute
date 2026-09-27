@@ -1,0 +1,8 @@
+<svg width="400" height="225" viewBox="0 0 400 225" xmlns="http://www.w3.org/2000/svg">
+  <rect width="400" height="225" fill="#1a3c5e"/>
+  <rect x="130" y="70" width="140" height="70" rx="8" fill="#0d2a45"/>
+  <text x="200" y="110" font-family="system-ui, sans-serif" font-size="28" font-weight="700" fill="#e8a838" text-anchor="middle">A1</text>
+  <text x="200" y="132" font-family="system-ui, sans-serif" font-size="10" fill="#ffffff" text-anchor="middle" opacity="0.8">CERTIFIED</text>
+  <path d="M180 160 L200 180 L230 140" stroke="#e8a838" stroke-width="4" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+  <text x="200" y="180" font-family="system-ui, sans-serif" font-size="16" font-weight="600" fill="#ffffff" text-anchor="middle">Exam Preparation</text>
+</svg>

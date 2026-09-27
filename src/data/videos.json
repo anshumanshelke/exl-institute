@@ -1,0 +1,29 @@
+{
+  "defaultLanguage": "german",
+  "videos": [
+    {
+      "languageId": "german",
+      "title": "German Demo Lesson",
+      "youtubeId": "[PLACEHOLDER: YouTube Video ID]",
+      "thumbnail": "[PLACEHOLDER: YouTube thumbnail URL or local path]"
+    },
+    {
+      "languageId": "french",
+      "title": "French Demo Lesson",
+      "youtubeId": "[PLACEHOLDER: YouTube Video ID]",
+      "thumbnail": "[PLACEHOLDER: YouTube thumbnail URL or local path]"
+    },
+    {
+      "languageId": "chinese",
+      "title": "Chinese Demo Lesson",
+      "youtubeId": "[PLACEHOLDER: YouTube Video ID]",
+      "thumbnail": "[PLACEHOLDER: YouTube thumbnail URL or local path]"
+    },
+    {
+      "languageId": "spoken-english",
+      "title": "Spoken English Demo Lesson",
+      "youtubeId": "[PLACEHOLDER: YouTube Video ID]",
+      "thumbnail": "[PLACEHOLDER: YouTube thumbnail URL or local path]"
+    }
+  ]
+}
