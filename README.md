@@ -80,7 +80,9 @@ All use `[PLACEHOLDER: ...]` format - search and replace.
 
 ## 🌐 Deploy
 
-**Netlify** (recommended):
+**Render** (static site + custom domain): configured by `render.yaml` — follow [docs/DEPLOY_RENDER.md](docs/DEPLOY_RENDER.md).
+
+**Netlify**:
 1. Connect GitHub repo
 2. Build: `npm run build` | Publish: `dist`
 3. Add env vars in dashboard
