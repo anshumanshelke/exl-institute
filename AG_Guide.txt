@@ -1,0 +1,11 @@
+Step 1 : Fetch the issue
+Step 2 : break that issue into smaller steps
+Step 3 : Solve each and every step- one by one
+Step 4 : After solving all that steps- review what you have done uptil now
+Step 5 : REview that whether it satisfies the primary / Fundamental requirements of that issue
+Step 6 : If Yes- merge with the main and go with the next issue- 
+Step 7 : If not- rectify the issue
+
+RANDOM INSTAGRAM GUIDE FOR VIBE CODING-
+
+

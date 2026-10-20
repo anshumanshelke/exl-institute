@@ -1,4 +1,4 @@
-import contactData from '../data/contact.json';
+import { SOCIAL_LINKS } from '../data/socialLinks';
 
 /**
  * Footer Component
@@ -17,14 +17,14 @@ export default function Footer() {
           &copy; {currentYear} EXL Institute. All rights reserved.
         </p>
         <div className="footer__social" role="list" aria-label="Social media links">
-          {Object.entries(contactData.social).map(([platform, url]) => (
+          {SOCIAL_LINKS.map(({ platform, url, label }) => (
             <a
               key={platform}
               href={url}
               target="_blank"
               rel="noopener noreferrer"
               className="footer__social-link"
-              aria-label={`Follow us on ${platform}`}
+              aria-label={label}
             >
               {platform === 'facebook' && (
                 <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">

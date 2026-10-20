@@ -149,6 +149,7 @@ export function useEmailJS() {
       const serviceId = import.meta.env.VITE_EMAILJS_SERVICE_ID;
       const templateId = import.meta.env.VITE_EMAILJS_TEMPLATE_ID;
       const publicKey = import.meta.env.VITE_EMAILJS_PUBLIC_KEY;
+      const contactEmail = import.meta.env.VITE_CONTACT_EMAIL;
 
       if (!serviceId || !templateId || !publicKey) {
         throw new Error('EmailJS configuration missing. Please set VITE_EMAILJS_SERVICE_ID, VITE_EMAILJS_TEMPLATE_ID, and VITE_EMAILJS_PUBLIC_KEY in your environment variables.');
@@ -157,8 +158,7 @@ export function useEmailJS() {
       // Initialize EmailJS with public key
       emailjs.init(publicKey);
 
-      // Prepare template parameters
-      // Note: Destination email (vijaysalgaonkar2026@gmail.com) should be set in EmailJS template "To Email" field
+      // Prepare template parameters - include ALL form fields
       const templateParams = {
         from_name: formData.fullName,
         from_email: formData.email,
@@ -167,6 +167,7 @@ export function useEmailJS() {
         level: formData.level || 'Not specified',
         contact_method: formData.contactMethod,
         message: formData.message || 'No additional message',
+        to_email: contactEmail || 'shalakkasalvi@gmail.com',
       };
 
       const response = await emailjs.send(serviceId, templateId, templateParams);

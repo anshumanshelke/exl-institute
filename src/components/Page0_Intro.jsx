@@ -3,7 +3,7 @@ import teacherData from '../data/teacher.json';
 
 /**
  * Page 0: Introduction / Opening
- * Teacher/MD hero section with large photo, bio, philosophy, CTA
+ * Teacher/MD hero section with real founder photo, bio, philosophy, CTA
  */
 export default function Page0_Intro() {
   return (
@@ -27,17 +27,20 @@ export default function Page0_Intro() {
           </blockquote>
           
           <div className="intro__cta-group">
-            <a href="#courses" className="btn btn-accent btn-lg">Explore Courses</a>
-            <a href="#contact" className="btn btn-secondary btn-lg">Contact Us</a>
+            <a href="#courses" className="btn btn-success btn-lg">Explore Courses</a>
+            <a href="#contact" className="btn btn-light-outline btn-lg">Contact Us</a>
           </div>
         </div>
         
         <div className="intro__photo">
           <img
             src={teacherData.photo}
-            alt={`${teacherData.name}, ${teacherData.designation} at EXL Institute`}
+            alt="Prof. Shalaka Kale, Founder and Managing Director of EXL Institute"
             className="intro__photo-img"
+            width="841"
+            height="1266"
             loading="eager"
+            decoding="async"
           />
         </div>
       </div>

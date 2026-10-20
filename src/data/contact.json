@@ -1,14 +1,8 @@
 {
-  "address": "[PLACEHOLDER: Institute street address, city, state, PIN code]",
-  "email": "vijaysalgaonkar2026@gmail.com",
-  "phone": "[PLACEHOLDER: +91-XXXXXXXXXX]",
-  "whatsapp": "[PLACEHOLDER: 91XXXXXXXXXX]",
-  "social": {
-    "facebook": "[PLACEHOLDER: https://facebook.com/exlinstitute]",
-    "instagram": "[PLACEHOLDER: https://instagram.com/exlinstitute]",
-    "linkedin": "[PLACEHOLDER: https://linkedin.com/company/exlinstitute]",
-    "youtube": "[PLACEHOLDER: https://youtube.com/@exlinstitute]"
-  },
+  "address": "A2, Indranil Apartments, Vedant Nagar (Ulkanagari / Surana Nagar), Behind New Divekar Auto, Opposite Deogiri B.Ed College, Beside Kothari Hospital, Aurangabad, Maharashtra – 431001",
+  "email": "shalakkasalvi@gmail.com",
+  "phone": "+91-94212-99637",
+  "whatsapp": "919421299637",
   "emailjs": {
     "serviceId": "[PLACEHOLDER: EmailJS Service ID]",
     "templateId": "[PLACEHOLDER: EmailJS Template ID]",

@@ -8,6 +8,11 @@ import testimonialsData from '../data/testimonials.json';
  */
 export default function Page4_Testimonials() {
   const testimonials = testimonialsData.testimonials;
+
+  // Hide values that are still unfilled placeholders (JSON stays untouched)
+  const isPlaceholder = (value) =>
+    typeof value !== 'string' || value.trim() === '' || value.startsWith('[PLACEHOLDER');
+
   const {
     currentIndex,
     next,
@@ -20,20 +25,20 @@ export default function Page4_Testimonials() {
     handleTouchEnd
   } = useCarousel(testimonials.length, {
     autoRotate: true,
-    interval: 6000,
+    interval: 5000,
     pauseOnHover: true
   });
 
   return (
-    <PageSection 
-      id="testimonials" 
-      title="Student Stories" 
+    <PageSection
+      id="testimonials"
+      title="Student Stories"
       subtitle="Hear directly from our students about their learning journey and achievements."
       variant="alt"
     >
-      <div 
-        className="carousel testimonials__carousel" 
-        role="region" 
+      <div
+        className="carousel testimonials__carousel"
+        role="region"
         aria-roledescription="carousel"
         aria-label="Student testimonials"
         onMouseEnter={handleMouseEnter}
@@ -43,36 +48,50 @@ export default function Page4_Testimonials() {
         onTouchEnd={handleTouchEnd}
       >
         <div className="carousel__track" style={{ transform: `translateX(-${currentIndex * 100}%)` }}>
-          {testimonials.map((testimonial, index) => (
-            <article key={testimonial.id} className="carousel__slide">
-              <div className="testimonial-slide">
-                <img
-                  src={testimonial.photo}
-                  alt={`${testimonial.name} - ${testimonial.language} student`}
-                  className="testimonial-slide__photo"
-                  loading={index < 2 ? 'eager' : 'lazy'}
-                />
-                <div className="testimonial-slide__content">
-                  <blockquote className="testimonial-slide__quote">
-                    {testimonial.review}
-                  </blockquote>
-                  <div className="testimonial-slide__author">
-                    <cite className="testimonial-slide__name">{testimonial.name}</cite>
-                    <div className="testimonial-slide__meta">
-                      <span>{testimonial.language}</span>
-                      <span aria-hidden="true">•</span>
-                      <span>{testimonial.level}</span>
+          {testimonials.map((testimonial, index) => {
+            const showLevel = !isPlaceholder(testimonial.level);
+            const achievement = !isPlaceholder(testimonial.achievement)
+              ? testimonial.achievement
+              : null;
+
+            return (
+              <article key={testimonial.id} className="carousel__slide">
+                <div className="testimonial-slide">
+                  <div className="testimonial-slide__photo-frame">
+                    <img
+                      src={testimonial.photo}
+                      alt={`${testimonial.name} — ${testimonial.language} student at EXL Institute`}
+                      className="testimonial-slide__photo"
+                      loading={index < 2 ? 'eager' : 'lazy'}
+                      decoding="async"
+                    />
+                  </div>
+                  <div className="testimonial-slide__content">
+                    <blockquote className="testimonial-slide__quote">
+                      {testimonial.review}
+                    </blockquote>
+                    <div className="testimonial-slide__author">
+                      <cite className="testimonial-slide__name">{testimonial.name}</cite>
+                      <div className="testimonial-slide__meta">
+                        <span>{testimonial.language}</span>
+                        {showLevel && (
+                          <>
+                            <span aria-hidden="true">•</span>
+                            <span>{testimonial.level}</span>
+                          </>
+                        )}
+                      </div>
+                      {achievement && (
+                        <p className="testimonial-slide__achievement">
+                          {achievement}
+                        </p>
+                      )}
                     </div>
                   </div>
-                  {testimonial.achievement && (
-                    <p className="testimonial-slide__achievement">
-                      {testimonial.achievement}
-                    </p>
-                  )}
                 </div>
-              </div>
-            </article>
-          ))}
+              </article>
+            );
+          })}
         </div>
 
         <button

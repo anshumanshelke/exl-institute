@@ -23,7 +23,7 @@ export default function Page3_HowWeTeach() {
         {teachingData.sections.map((section, index) => (
           <article key={section.id} className="teaching-card">
             <div className="teaching-card__iframe-wrapper">
-              {section.iframeUrl && section.iframeUrl !== '[PLACEHOLDER: https://...]' ? (
+              {section.iframeUrl && !section.iframeUrl.includes('PLACEHOLDER') ? (
                 <>
                   <iframe
                     className="teaching-card__iframe"
