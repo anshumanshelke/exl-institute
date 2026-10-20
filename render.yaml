@@ -1,0 +1,52 @@
+# Render Blueprint — deploys the site as a free Static Site
+# Docs: https://render.com/docs/blueprint-spec
+# Setup steps: docs/DEPLOY_RENDER.md
+services:
+  - type: web
+    runtime: static
+    name: exl-institute
+    branch: master
+    buildCommand: npm ci && npm run build
+    staticPublishPath: ./dist
+    autoDeployTrigger: commit
+
+    envVars:
+      # Vite 8 needs Node 20.19+
+      - key: NODE_VERSION
+        value: "22"
+      # EmailJS keys are baked into the bundle at build time.
+      # sync: false → Render asks for the values when the Blueprint is created.
+      - key: VITE_EMAILJS_SERVICE_ID
+        sync: false
+      - key: VITE_EMAILJS_TEMPLATE_ID
+        sync: false
+      - key: VITE_EMAILJS_PUBLIC_KEY
+        sync: false
+
+    # Uncomment and set your domain. Render adds the www/root pair automatically.
+    # domains:
+    #   - yourdomain.com
+
+    routes:
+      # Unknown paths load the app (files that exist are always served as-is)
+      - type: rewrite
+        source: /*
+        destination: /index.html
+
+    headers:
+      - path: /*
+        name: X-Frame-Options
+        value: DENY
+      - path: /*
+        name: X-Content-Type-Options
+        value: nosniff
+      - path: /*
+        name: Referrer-Policy
+        value: strict-origin-when-cross-origin
+      - path: /*
+        name: Permissions-Policy
+        value: camera=(), microphone=(), geolocation=()
+      # Hashed build output never changes, so it can be cached forever
+      - path: /assets/*
+        name: Cache-Control
+        value: public, max-age=31536000, immutable
