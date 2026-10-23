@@ -58,7 +58,7 @@ Edit these JSON files to update the website:
 | `src/data/teacher.json` | Teacher name, photo, bio, philosophy |
 | `src/data/achievements.json` | Student achievement carousel |
 | `src/data/courses.json` | Language → Level → Modules |
-| `src/data/teachingMethod.json` | 5 teaching method cards (iframe URLs) |
+| `src/data/teachingMethod.json` | 4 How We Teach feature boxes |
 | `src/data/testimonials.json` | Student testimonials carousel |
 | `src/data/contact.json` | Address, phone, WhatsApp, social links |
 

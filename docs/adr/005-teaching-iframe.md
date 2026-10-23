@@ -44,9 +44,7 @@ Page 3 requires an interactive visual presentation explaining the teaching metho
     {
       "id": "live-classes",
       "title": "Live Classes",
-      "description": "Real-time interactive sessions with the teacher",
-      "iframeUrl": "[PLACEHOLDER: https://...]",
-      "placeholderImage": "/assets/teaching-live-placeholder.svg"
+      "description": "Real-time interactive sessions with the teacher and guided self-study"
     }
     // guided-learning, self-study, practice, exam-prep
   ]
