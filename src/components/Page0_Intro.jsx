@@ -1,4 +1,4 @@
-import { PageSection } from './Section';
+import { Section, SectionHeader } from './Section';
 import teacherData from '../data/teacher.json';
 
 /**
@@ -7,15 +7,22 @@ import teacherData from '../data/teacher.json';
  */
 export default function Page0_Intro() {
   return (
-    <PageSection 
+    <Section
       id="intro" 
-      title="Meet Your Teacher" 
-      subtitle={teacherData.designation}
       variant="dark"
       className="intro-section"
+      aria-labelledby="intro-title"
     >
       <div className="intro__inner">
         <div className="intro__content">
+          <header className="page-section__header">
+            <SectionHeader
+              title="Meet Your Founder"
+              subtitle={teacherData.designation}
+              titleId="intro-title"
+            />
+          </header>
+
           <p className="intro__name">{teacherData.name}</p>
           
           <p className="intro__introduction">
@@ -44,6 +51,6 @@ export default function Page0_Intro() {
           />
         </div>
       </div>
-    </PageSection>
+    </Section>
   );
 }

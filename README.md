@@ -8,7 +8,7 @@ Clean, standard professional website built with React + Vite. Single-page layout
 - **Data-Driven**: All content in `/src/data/*.json` - edit without touching code
 - **Responsive**: Mobile-first, works on all devices
 - **Accessible**: Semantic HTML, keyboard nav, reduced motion support
-- **Contact Form**: EmailJS integration (configured for vijaysalgaonkar2026@gmail.com)
+- **Contact Form**: EmailJS integration configured through Vite environment variables
 - **No Dependencies**: Pure CSS, no UI frameworks
 
 ## 🛠 Tech Stack
@@ -66,12 +66,11 @@ All use `[PLACEHOLDER: ...]` format - search and replace.
 
 ## 📧 EmailJS Setup
 
-1. Create account at [emailjs.com](https://www.emailjs.com/)
-2. Add Email Service (Gmail) → get **Service ID**
-3. Create Template with variables: `from_name`, `from_email`, `phone`, `language`, `level`, `contact_method`, `message`
-4. Set **To Email** = `vijaysalgaonkar2026@gmail.com`
-5. Get **Template ID** and **Public Key**
-6. Add to `.env`:
+1. Create an account at [emailjs.com](https://www.emailjs.com/) and add an email service.
+2. Create a template whose **To Email** is the institute owner's address. The visitor does not receive an auto reply.
+3. Use these exact template variables: `from_name`, `from_email`, `phone`, `language`, `level`, `contact_method`, `message`.
+4. Find the **Service ID**, **Template ID**, and **Public Key** in the EmailJS dashboard.
+5. Add the three values to `.env`:
    ```env
    VITE_EMAILJS_SERVICE_ID=service_xxx
    VITE_EMAILJS_TEMPLATE_ID=template_xxx

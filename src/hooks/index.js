@@ -1,4 +1,6 @@
 import { useState, useEffect, useCallback, useRef } from 'react';
+export { useEmailJS } from './useEmailJS';
+export { useToast } from './useToast';
 
 /**
  * Reusable carousel hook for both achievements and testimonials
@@ -92,7 +94,6 @@ export function useCarousel(itemCount, options = {}) {
     handleTouchEnd
   };
 }
-
 /**
  * Hook to detect prefers-reduced-motion
  */
@@ -130,67 +131,4 @@ export function useSmoothScroll() {
   }, []);
 
   return { scrollToSection };
-}
-
-/**
- * Hook for EmailJS form submission
- */
-export function useEmailJS() {
-  const [status, setStatus] = useState('idle'); // 'idle' | 'submitting' | 'success' | 'error'
-  const [message, setMessage] = useState('');
-
-  const sendEmail = useCallback(async (formData) => {
-    setStatus('submitting');
-    setMessage('');
-
-    try {
-      const emailjs = await import('@emailjs/browser');
-      
-      const serviceId = import.meta.env.VITE_EMAILJS_SERVICE_ID;
-      const templateId = import.meta.env.VITE_EMAILJS_TEMPLATE_ID;
-      const publicKey = import.meta.env.VITE_EMAILJS_PUBLIC_KEY;
-      const contactEmail = import.meta.env.VITE_CONTACT_EMAIL;
-
-      if (!serviceId || !templateId || !publicKey) {
-        throw new Error('EmailJS configuration missing. Please set VITE_EMAILJS_SERVICE_ID, VITE_EMAILJS_TEMPLATE_ID, and VITE_EMAILJS_PUBLIC_KEY in your environment variables.');
-      }
-
-      // Initialize EmailJS with public key
-      emailjs.init(publicKey);
-
-      // Prepare template parameters - include ALL form fields
-      const templateParams = {
-        from_name: formData.fullName,
-        from_email: formData.email,
-        phone: formData.phone,
-        language: formData.language,
-        level: formData.level || 'Not specified',
-        contact_method: formData.contactMethod,
-        message: formData.message || 'No additional message',
-        to_email: contactEmail || 'shalakkasalvi@gmail.com',
-      };
-
-      const response = await emailjs.send(serviceId, templateId, templateParams);
-
-      if (response.status === 200) {
-        setStatus('success');
-        setMessage('Thank you! Your enquiry has been sent successfully. We\'ll get back to you soon.');
-        return { success: true };
-      } else {
-        throw new Error('Failed to send email');
-      }
-    } catch (error) {
-      console.error('EmailJS Error:', error);
-      setStatus('error');
-      setMessage('Failed to send enquiry. Please try again later or contact us directly.');
-      return { success: false, error: error.message };
-    }
-  }, []);
-
-  const resetStatus = useCallback(() => {
-    setStatus('idle');
-    setMessage('');
-  }, []);
-
-  return { status, message, sendEmail, resetStatus };
 }

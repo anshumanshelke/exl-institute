@@ -1,21 +1,44 @@
 import { SOCIAL_LINKS } from '../data/socialLinks';
+import { NAV_LINKS } from '../data/navigation';
+import { useSmoothScroll } from '../hooks';
 
 /**
  * Footer Component
- * Copyright, social links, simple and clean
+ * Brand, quick links, social links, and copyright
  */
 export default function Footer() {
   const currentYear = new Date().getFullYear();
+  const { scrollToSection } = useSmoothScroll();
+
+  const handleNavClick = (event, sectionId) => {
+    event.preventDefault();
+    scrollToSection(sectionId);
+  };
 
   return (
     <footer className="footer" role="contentinfo">
-      <div className="footer__inner">
-        <p className="footer__logo">
-          EXL Institute of Foreign Languages
-        </p>
-        <p className="footer__copyright">
-          &copy; {currentYear} EXL Institute. All rights reserved.
-        </p>
+      <div className="container footer__inner">
+        <div className="footer__brand">
+          <p className="footer__logo">EXL Institute</p>
+          <p className="footer__tagline">Institute of Foreign Languages</p>
+        </div>
+
+        <nav className="footer__quick-links" aria-label="Footer navigation">
+          <h2 className="footer__heading">Quick Links</h2>
+          <div className="footer__quick-links-grid">
+            {NAV_LINKS.map(({ id, label }) => (
+              <a
+                key={id}
+                href={`#${id}`}
+                className="footer__quick-link"
+                onClick={event => handleNavClick(event, id)}
+              >
+                {label}
+              </a>
+            ))}
+          </div>
+        </nav>
+
         <div className="footer__social" role="list" aria-label="Social media links">
           {SOCIAL_LINKS.map(({ platform, url, label }) => (
             <a
@@ -53,6 +76,11 @@ export default function Footer() {
             </a>
           ))}
         </div>
+      </div>
+      <div className="container footer__bottom">
+        <p className="footer__copyright">
+          &copy; {currentYear} EXL Institute. All rights reserved.
+        </p>
       </div>
     </footer>
   );

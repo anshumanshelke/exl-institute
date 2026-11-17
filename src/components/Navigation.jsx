@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react';
 import { useSmoothScroll } from '../hooks';
 import teacherData from '../data/teacher.json';
 import contactData from '../data/contact.json';
+import { NAV_LINKS } from '../data/navigation';
 
 /**
  * Navigation / Header Component
@@ -25,15 +26,6 @@ export default function Navigation() {
     setMobileMenuOpen(false);
   };
 
-  const navLinks = [
-    { id: 'intro', label: 'Home' },
-    { id: 'achievements', label: 'Students' },
-    { id: 'courses', label: 'Courses' },
-    { id: 'teaching', label: 'How We Teach' },
-    { id: 'testimonials', label: 'Stories' },
-    { id: 'contact', label: 'Contact' }
-  ];
-
   return (
     <header className={`navigation ${scrolled ? 'scrolled' : ''}`} role="banner">
       <div className="navigation__inner">
@@ -49,7 +41,7 @@ export default function Navigation() {
 
         {/* Desktop Navigation */}
         <nav className="navigation__menu" role="navigation" aria-label="Main navigation">
-          {navLinks.map(link => (
+          {NAV_LINKS.map(link => (
             <a
               key={link.id}
               href={`#${link.id}`}
@@ -104,7 +96,7 @@ export default function Navigation() {
       {/* Mobile Menu */}
       {mobileMenuOpen && (
         <nav id="mobile-menu" className="navigation__menu open" role="navigation" aria-label="Mobile navigation">
-          {navLinks.map(link => (
+          {NAV_LINKS.map(link => (
             <a
               key={link.id}
               href={`#${link.id}`}
