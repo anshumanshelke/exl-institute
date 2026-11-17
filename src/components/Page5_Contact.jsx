@@ -1,9 +1,66 @@
-import { useState } from 'react';
+import { Fragment, useEffect, useMemo, useRef, useState } from 'react';
 import { PageSection } from './Section';
-import { useEmailJS } from '../hooks';
+import Toast from './Toast';
+import { useEmailJS, useToast } from '../hooks';
 import coursesData from '../data/courses.json';
 import contactData from '../data/contact.json';
 import { SOCIAL_LINKS } from '../data/socialLinks';
+import {
+  getCountries,
+  getCountryCallingCode,
+  parsePhoneNumberFromString
+} from 'libphonenumber-js/min';
+
+const flagUrls = import.meta.glob('../../node_modules/country-flag-icons/3x2/*.svg', {
+  eager: true,
+  import: 'default',
+  query: '?url'
+});
+
+const INDIA_COUNTRY = 'IN';
+const countryNames = new Intl.DisplayNames(['en'], { type: 'region' });
+const countryOptions = getCountries()
+  .map(code => ({
+    code,
+    name: countryNames.of(code) || code,
+    callingCode: `+${getCountryCallingCode(code)}`
+  }))
+  .filter(country => country.name)
+  .sort((a, b) => a.name.localeCompare(b.name));
+const orderedCountryOptions = [
+  countryOptions.find(country => country.code === INDIA_COUNTRY),
+  ...countryOptions.filter(country => country.code !== INDIA_COUNTRY)
+];
+
+const getCountry = (code) => countryOptions.find(country => country.code === code) || countryOptions[0];
+
+const sanitizePhoneInput = (value) => {
+  const sanitized = value.replace(/[^\d\s()+-]/g, '');
+  return sanitized.replace(/(?!^)\+/g, '');
+};
+
+const getPhoneNumber = (value, countryCode) => {
+  const normalizedValue = value.trim();
+  if (!normalizedValue) return undefined;
+  return parsePhoneNumberFromString(normalizedValue, countryCode);
+};
+
+const getPhoneError = (value, countryCode) => {
+  if (!value.trim()) return 'Phone number is required';
+  const phoneNumber = getPhoneNumber(value, countryCode);
+  return phoneNumber?.isValid()
+    ? ''
+    : `Please enter a valid phone number for ${getCountry(countryCode).name}`;
+};
+
+const Flag = ({ country, className = '' }) => {
+  const flagUrl = flagUrls[`../../node_modules/country-flag-icons/3x2/${country.code}.svg`];
+  return flagUrl ? (
+    <img src={flagUrl} className={`contact-form__country-flag ${className}`} alt="" aria-hidden="true" />
+  ) : (
+    <span className="contact-form__country-flag-fallback" aria-hidden="true">{country.code}</span>
+  );
+};
 
 /**
  * Page 5: Contact / Registration
@@ -18,10 +75,54 @@ export default function Page5_Contact() {
     language: '',
     level: '',
     contactMethod: 'Phone',
-    message: ''
+    message: '',
+    honeypot: ''
   });
+  const [phoneCountry, setPhoneCountry] = useState(INDIA_COUNTRY);
+  const [isCountryOpen, setIsCountryOpen] = useState(false);
+  const [countrySearch, setCountrySearch] = useState('');
+  const [highlightedCountry, setHighlightedCountry] = useState(0);
   const [errors, setErrors] = useState({});
-  const { status, message, sendEmail, resetStatus } = useEmailJS();
+  const { status, sendEmail } = useEmailJS();
+  const { toasts, showToast, dismissToast } = useToast();
+  const fieldRefs = useRef({});
+  const countryPickerRef = useRef(null);
+  const countrySearchRef = useRef(null);
+  const countryOptionRefs = useRef([]);
+
+  const selectedCountry = getCountry(phoneCountry);
+  const filteredCountries = useMemo(() => {
+    const query = countrySearch.trim().toLowerCase();
+    if (!query) return orderedCountryOptions;
+    return orderedCountryOptions.filter(country => (
+      country.name.toLowerCase().includes(query) ||
+      country.code.toLowerCase().includes(query) ||
+      country.callingCode.includes(query) ||
+      (country.code === 'GB' && 'uk'.includes(query))
+    ));
+  }, [countrySearch]);
+
+  useEffect(() => {
+    const handleOutsideClick = (event) => {
+      if (!countryPickerRef.current?.contains(event.target)) {
+        setIsCountryOpen(false);
+      }
+    };
+    document.addEventListener('mousedown', handleOutsideClick);
+    return () => document.removeEventListener('mousedown', handleOutsideClick);
+  }, []);
+
+  useEffect(() => {
+    if (isCountryOpen) countrySearchRef.current?.focus();
+  }, [isCountryOpen]);
+
+  const resetForm = () => {
+    setFormData({ fullName: '', email: '', phone: '', language: '', level: '', contactMethod: 'Phone', message: '', honeypot: '' });
+    setPhoneCountry(INDIA_COUNTRY);
+    setIsCountryOpen(false);
+    setCountrySearch('');
+    setErrors({});
+  };
 
   const getLevelsForLanguage = (languageId) => {
     const language = coursesData.languages.find(l => l.id === languageId);
@@ -45,8 +146,9 @@ export default function Page5_Contact() {
     
     if (!formData.phone.trim()) {
       newErrors.phone = 'Phone number is required';
-    } else if (!/^[\+]?[\d\s\-\(\)]{10,}$/.test(formData.phone)) {
-      newErrors.phone = 'Please enter a valid phone number';
+    } else {
+      const phoneError = getPhoneError(formData.phone, phoneCountry);
+      if (phoneError) newErrors.phone = phoneError;
     }
     
     if (!formData.language) {
@@ -58,11 +160,33 @@ export default function Page5_Contact() {
     }
 
     setErrors(newErrors);
+    const firstInvalidField = Object.keys(newErrors)[0];
+    if (firstInvalidField) fieldRefs.current[firstInvalidField]?.focus();
     return Object.keys(newErrors).length === 0;
   };
 
   const handleChange = (e) => {
     const { name, value } = e.target;
+    if (name === 'phone') {
+      const sanitizedValue = sanitizePhoneInput(value);
+      const pastedPhone = sanitizedValue.startsWith('+')
+        ? parsePhoneNumberFromString(sanitizedValue, phoneCountry)
+        : undefined;
+
+      if (pastedPhone?.country && pastedPhone.country !== phoneCountry) {
+        setPhoneCountry(pastedPhone.country);
+        setFormData(prev => ({ ...prev, phone: pastedPhone.nationalNumber }));
+        setErrors(prev => ({ ...prev, phone: getPhoneError(pastedPhone.nationalNumber, pastedPhone.country) }));
+        return;
+      }
+
+      setFormData(prev => ({ ...prev, phone: sanitizedValue }));
+      if (errors.phone) {
+        setErrors(prev => ({ ...prev, phone: getPhoneError(sanitizedValue, phoneCountry) }));
+      }
+      return;
+    }
+
     setFormData(prev => ({ ...prev, [name]: value }));
     if (errors[name]) {
       setErrors(prev => ({ ...prev, [name]: '' }));
@@ -72,23 +196,99 @@ export default function Page5_Contact() {
     }
   };
 
+  const selectCountry = (countryCode) => {
+    setPhoneCountry(countryCode);
+    setIsCountryOpen(false);
+    setCountrySearch('');
+    setErrors(prev => ({ ...prev, phone: getPhoneError(formData.phone, countryCode) }));
+    fieldRefs.current.phone?.focus();
+  };
+
+  const handleCountryTriggerKeyDown = (event) => {
+    if (event.key === 'ArrowDown' || event.key === 'ArrowUp') {
+      event.preventDefault();
+      setIsCountryOpen(true);
+      return;
+    }
+    if (event.key === 'Enter' || event.key === ' ') {
+      event.preventDefault();
+      setIsCountryOpen(prev => !prev);
+      return;
+    }
+    if (event.key === 'Escape') {
+      setIsCountryOpen(false);
+      return;
+    }
+    if (event.key.length === 1 && !event.ctrlKey && !event.metaKey) {
+      event.preventDefault();
+      setIsCountryOpen(true);
+      setCountrySearch(prev => prev + event.key);
+      setHighlightedCountry(0);
+    }
+  };
+
+  const handleCountrySearchKeyDown = (event) => {
+    if (event.key === 'ArrowDown') {
+      event.preventDefault();
+      const nextIndex = Math.min(highlightedCountry, filteredCountries.length - 1);
+      setHighlightedCountry(nextIndex);
+      countryOptionRefs.current[nextIndex]?.focus();
+    } else if (event.key === 'ArrowUp') {
+      event.preventDefault();
+      const nextIndex = Math.max(highlightedCountry - 1, 0);
+      setHighlightedCountry(nextIndex);
+      countryOptionRefs.current[nextIndex]?.focus();
+    } else if (event.key === 'Enter' && filteredCountries[highlightedCountry]) {
+      event.preventDefault();
+      selectCountry(filteredCountries[highlightedCountry].code);
+    } else if (event.key === 'Escape') {
+      event.preventDefault();
+      setIsCountryOpen(false);
+    }
+  };
+
+  const handleCountryOptionKeyDown = (event, index) => {
+    if (event.key === 'ArrowDown' || event.key === 'ArrowUp') {
+      event.preventDefault();
+      const delta = event.key === 'ArrowDown' ? 1 : -1;
+      const nextIndex = Math.max(0, Math.min(index + delta, filteredCountries.length - 1));
+      setHighlightedCountry(nextIndex);
+      countryOptionRefs.current[nextIndex]?.focus();
+    } else if (event.key === 'Enter' || event.key === ' ') {
+      event.preventDefault();
+      selectCountry(filteredCountries[index].code);
+    } else if (event.key === 'Escape') {
+      event.preventDefault();
+      setIsCountryOpen(false);
+    }
+  };
+
   const handleSubmit = async (e) => {
     e.preventDefault();
-    
+
+    if (formData.honeypot) {
+      resetForm();
+      showToast('Your details were sent. The institute will get back to you soon.');
+      return;
+    }
+
     if (!validateForm()) return;
 
-    const result = await sendEmail(formData);
+    const lastSuccessfulSend = Number(sessionStorage.getItem('exl-contact-last-send') || 0);
+    if (Date.now() - lastSuccessfulSend < 30000) {
+      showToast('Please wait a little before sending another enquiry.', 'error');
+      return;
+    }
+
+    const phoneNumber = getPhoneNumber(formData.phone, phoneCountry);
+    const result = await sendEmail({ ...formData, phone: phoneNumber.number });
     
     if (result.success) {
-      setFormData({
-        fullName: '',
-        email: '',
-        phone: '',
-        language: '',
-        level: '',
-        contactMethod: 'Phone',
-        message: ''
-      });
+      sessionStorage.setItem('exl-contact-last-send', String(Date.now()));
+      resetForm();
+      showToast('Your details were sent. The institute will get back to you soon.');
+    } else {
+      showToast(`We could not send your details. Please try again or contact us by phone at ${contactData.phone} or WhatsApp.`, 'error');
     }
   };
 
@@ -122,6 +322,7 @@ export default function Page5_Contact() {
                   aria-invalid={!!errors.fullName}
                   aria-describedby={errors.fullName ? 'fullName-error' : undefined}
                   autoComplete="name"
+                  ref={element => { fieldRefs.current.fullName = element; }}
                 />
                 {errors.fullName && (
                   <p id="fullName-error" className="contact-form__error" role="alert">{errors.fullName}</p>
@@ -143,6 +344,7 @@ export default function Page5_Contact() {
                   aria-invalid={!!errors.email}
                   aria-describedby={errors.email ? 'email-error' : undefined}
                   autoComplete="email"
+                  ref={element => { fieldRefs.current.email = element; }}
                 />
                 {errors.email && (
                   <p id="email-error" className="contact-form__error" role="alert">{errors.email}</p>
@@ -155,19 +357,80 @@ export default function Page5_Contact() {
                 <label htmlFor="phone" className="contact-form__label">
                   Phone Number <span aria-hidden="true">*</span>
                 </label>
-                <input
-                  type="tel"
-                  id="phone"
-                  name="phone"
-                  value={formData.phone}
-                  onChange={handleChange}
-                  className="contact-form__input"
-                  required
-                  aria-invalid={!!errors.phone}
-                  aria-describedby={errors.phone ? 'phone-error' : undefined}
-                  autoComplete="tel"
-                  placeholder="+91 XXXXXXXXXX"
-                />
+                <div className={`contact-form__phone-control ${errors.phone ? 'has-error' : ''}`}>
+                  <div className="contact-form__country-picker" ref={countryPickerRef}>
+                    <button
+                      type="button"
+                      className="contact-form__country-trigger"
+                      aria-label={`Country code: ${selectedCountry.name} ${selectedCountry.callingCode}`}
+                      aria-haspopup="listbox"
+                      aria-expanded={isCountryOpen}
+                      aria-controls="phone-country-options"
+                      onClick={() => setIsCountryOpen(prev => !prev)}
+                      onKeyDown={handleCountryTriggerKeyDown}
+                    >
+                      <Flag country={selectedCountry} />
+                      <span>{selectedCountry.callingCode}</span>
+                      <span className="contact-form__country-chevron" aria-hidden="true">⌄</span>
+                    </button>
+                    {isCountryOpen && (
+                      <div className="contact-form__country-menu">
+                        <input
+                          ref={countrySearchRef}
+                          type="search"
+                          className="contact-form__country-search"
+                          value={countrySearch}
+                          onChange={event => {
+                            setCountrySearch(event.target.value);
+                            setHighlightedCountry(0);
+                          }}
+                          onKeyDown={handleCountrySearchKeyDown}
+                          placeholder="Search country or code"
+                          aria-label="Search country or dialing code"
+                          autoComplete="off"
+                        />
+                        <div id="phone-country-options" className="contact-form__country-options" role="listbox" aria-label="Country codes">
+                          {filteredCountries.map((country, index) => (
+                            <Fragment key={country.code}>
+                              {!countrySearch && index === 1 && (
+                                <div key="country-divider" className="contact-form__country-divider" role="separator" />
+                              )}
+                              <button
+                                type="button"
+                                role="option"
+                                aria-selected={country.code === phoneCountry}
+                                className={`contact-form__country-option ${country.code === phoneCountry ? 'is-selected' : ''}`}
+                                ref={element => { countryOptionRefs.current[index] = element; }}
+                                onClick={() => selectCountry(country.code)}
+                                onKeyDown={event => handleCountryOptionKeyDown(event, index)}
+                                tabIndex={index === highlightedCountry ? 0 : -1}
+                              >
+                                <Flag country={country} />
+                                <span>{country.name}</span>
+                                <span className="contact-form__country-code">{country.callingCode}</span>
+                              </button>
+                            </Fragment>
+                          ))}
+                        </div>
+                      </div>
+                    )}
+                  </div>
+                  <input
+                    type="tel"
+                    id="phone"
+                    name="phone"
+                    value={formData.phone}
+                    onChange={handleChange}
+                    className="contact-form__phone-input"
+                    required
+                    aria-invalid={!!errors.phone}
+                    aria-describedby={errors.phone ? 'phone-error' : undefined}
+                    autoComplete="tel-national"
+                    inputMode="tel"
+                    placeholder="Phone number"
+                    ref={element => { fieldRefs.current.phone = element; }}
+                  />
+                </div>
                 {errors.phone && (
                   <p id="phone-error" className="contact-form__error" role="alert">{errors.phone}</p>
                 )}
@@ -185,6 +448,7 @@ export default function Page5_Contact() {
                   className="contact-form__select"
                   required
                   aria-invalid={!!errors.contactMethod}
+                  ref={element => { fieldRefs.current.contactMethod = element; }}
                 >
                   {contactMethods.map(method => (
                     <option key={method} value={method}>{method}</option>
@@ -209,6 +473,7 @@ export default function Page5_Contact() {
                   className="contact-form__select"
                   required
                   aria-invalid={!!errors.language}
+                  ref={element => { fieldRefs.current.language = element; }}
                 >
                   <option value="">Select a language</option>
                   {languageOptions.map(lang => (
@@ -255,7 +520,16 @@ export default function Page5_Contact() {
               />
             </div>
 
-            <input type="hidden" name="honeypot" tabIndex={-1} autoComplete="off" />
+            <input
+              type="text"
+              name="website"
+              value={formData.honeypot}
+              onChange={handleChange}
+              className="contact-form__honeypot"
+              tabIndex={-1}
+              autoComplete="off"
+              aria-hidden="true"
+            />
 
             <button
               type="submit"
@@ -269,18 +543,9 @@ export default function Page5_Contact() {
                   Sending...
                 </>
               ) : (
-                'Send Enquiry'
+                'SEND DETAILS'
               )}
             </button>
-
-            {(status === 'success' || status === 'error') && (
-              <div 
-                className={`contact-form__status ${status === 'success' ? 'contact-form__status--success' : 'contact-form__status--error'}`}
-                role="alert"
-              >
-                {message}
-              </div>
-            )}
           </form>
         </div>
 
@@ -339,8 +604,8 @@ export default function Page5_Contact() {
 
           <div className="contact-info-card">
             <h3 className="contact-info-card__title">
-              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" aria-hidden="true">
-                <path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"></path>
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+                <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967c-.273-.099-.471-.148-.67.15c-.197.297-.767.966-.94 1.164c-.173.199-.347.223-.644.075c-.297-.15-1.255-.463-2.39-1.475c-.883-.788-1.48-1.761-1.653-2.059c-.173-.297-.018-.458.13-.606c.134-.133.298-.347.446-.52c.149-.174.198-.298.298-.497c.099-.198.05-.371-.025-.52c-.075-.149-.669-1.612-.916-2.207c-.242-.579-.487-.5-.669-.51a12.8 12.8 0 0 0-.57-.01c-.198 0-.52.074-.792.372c-.272.297-1.04 1.016-1.04 2.479c0 1.462 1.065 2.875 1.213 3.074c.149.198 2.096 3.2 5.077 4.487c.709.306 1.262.489 1.694.625c.712.227 1.36.195 1.871.118c.571-.085 1.758-.719 2.006-1.413c.248-.694.248-1.289.173-1.413c-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214l-3.741.982l.998-3.648l-.235-.374a9.86 9.86 0 0 1-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884c2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 0 1 2.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0 0 12.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 0 0 5.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 0 0-3.48-8.413Z"></path>
               </svg>
               WhatsApp Business
             </h3>
@@ -351,7 +616,7 @@ export default function Page5_Contact() {
               className="contact-info-card__whatsapp"
             >
               <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
-                <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a19.5 19.5 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.5 19.5 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/>
+                <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967c-.273-.099-.471-.148-.67.15c-.197.297-.767.966-.94 1.164c-.173.199-.347.223-.644.075c-.297-.15-1.255-.463-2.39-1.475c-.883-.788-1.48-1.761-1.653-2.059c-.173-.297-.018-.458.13-.606c.134-.133.298-.347.446-.52c.149-.174.198-.298.298-.497c.099-.198.05-.371-.025-.52c-.075-.149-.669-1.612-.916-2.207c-.242-.579-.487-.5-.669-.51a12.8 12.8 0 0 0-.57-.01c-.198 0-.52.074-.792.372c-.272.297-1.04 1.016-1.04 2.479c0 1.462 1.065 2.875 1.213 3.074c.149.198 2.096 3.2 5.077 4.487c.709.306 1.262.489 1.694.625c.712.227 1.36.195 1.871.118c.571-.085 1.758-.719 2.006-1.413c.248-.694.248-1.289.173-1.413c-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214l-3.741.982l.998-3.648l-.235-.374a9.86 9.86 0 0 1-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884c2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 0 1 2.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0 0 12.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 0 0 5.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 0 0-3.48-8.413Z"></path>
               </svg>
               Chat on WhatsApp
             </a>
@@ -394,6 +659,11 @@ export default function Page5_Contact() {
             </div>
           </div>
         </aside>
+      </div>
+      <div className="toast-stack" aria-label="Notifications">
+        {toasts.map(toast => (
+          <Toast key={toast.id} {...toast} onClose={() => dismissToast(toast.id)} />
+        ))}
       </div>
     </PageSection>
   );
